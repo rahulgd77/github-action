@@ -25,9 +25,9 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          context: ./my-website
+          context: ./mywebsite
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/my-website:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/mywebsite:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -46,8 +46,8 @@ jobs:
       - name: Deploy to server
         run: |
           ssh -i key.pem -o StrictHostKeyChecking=no ec2-user@ec2-3-106-219-189.ap-southeast-2.compute.amazonaws.com "
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/my-website:latest &&
-            sudo docker stop my-website-container || true &&
-            sudo docker rm my-website-container || true &&
-            sudo docker run -d --name my-website-container -p 80:80 ${{ secrets.DOCKER_USERNAME }}/my-website:latest
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/mywebsite:latest &&
+            sudo docker stop mywebsite-container || true &&
+            sudo docker rm mywebsite-container || true &&
+            sudo docker run -d --name mywebsite-container -p 80:80 ${{ secrets.DOCKER_USERNAME }}/mywebsite:latest
           "
