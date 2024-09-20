@@ -45,7 +45,7 @@ jobs:
 
       - name: Deploy to server
         run: |
-          ssh -i key.pem -o StrictHostKeyChecking=no ec2-user@ec2-54.252.213.83.ap-southeast-2.compute.amazonaws.com "
+          ssh -i key.pem -o StrictHostKeyChecking=no ec2-user@ec2-54-252-213-83.ap-southeast-2.compute.amazonaws.com"
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/mywebsite:latest &&
             sudo docker stop mywebsite-container || true &&
             sudo docker rm mywebsite-container || true &&
